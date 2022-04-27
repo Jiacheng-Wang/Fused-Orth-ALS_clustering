@@ -13,7 +13,18 @@ library(rTensor)
 library(genlasso)
 library(gtools)
 
-fuse_orth_als_graph <- function(tnsr, r, max_iter, lambda,knn_size=2, tol = 1e-4){
+# main function for tensor missing fiber imputation
+#### Input: 
+# tnsr: order three tensor dataset
+# r: cp rank for tensor decomposition
+# lambda: tuning parameter for graphical lasso penalty imposed on row differences of factor matrices
+# knn_size: k-nearest neighbors to perform graphical lasso, it can be chosen as the minimum value that make the graph connected
+#### Output:
+# w: weights in CP decomposition
+# A,B,C: factor matrices with graphical clustering structure
+# err: relative error
+
+fuse_orth_als_graph <- function(tnsr, r, lambda, knn_size, max_iter = 100, tol = 1e-4){
   # get dimension along each mode
   d1 = tnsr@modes[1]
   d2 = tnsr@modes[2]
@@ -76,8 +87,7 @@ fuse_orth_als_graph <- function(tnsr, r, max_iter, lambda,knn_size=2, tol = 1e-4
   return(list(w = w,
               A = A, 
               B = B,
-              C = C, 
-              D_graph = D_graph,
+              C = C,
               err = err))
 }
 
