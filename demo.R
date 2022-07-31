@@ -1,7 +1,7 @@
 #  #######################################################################
 #       File-Name:      demo.R
 #       Date:           Wed Apr 27 18:09:59 2022
-#       Author:         JCW
+#       Author:         
 #       Purpose:        
 #       Input Files:    NONE
 #       Output Files:   NONE
